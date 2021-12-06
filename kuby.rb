@@ -21,7 +21,7 @@ Kuby.define('KubyTest') do
         email app_creds[:KUBY_DOCKER_EMAIL]
       end
 
-      image_url 'docker.io/kingdonb/kuby-test'
+      image_url 'kingdonb/kuby-test'
     end
 
     kubernetes do
