@@ -35,6 +35,7 @@ Kuby.define('KubyTest') do
     kubernetes do
       # Add a plugin that facilitates deploying a Rails app.
       add_plugin :rails_app do
+        hostname 'kuby-test.hephy.pro'
         # configure database credentials
         database do
           user app_creds[:KUBY_DB_USER]
