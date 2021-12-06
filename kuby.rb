@@ -45,7 +45,7 @@ Kuby.define('KubyTest') do
 
       provider :digitalocean do
         access_token app_creds[:KUBY_DIGITALOCEAN_ACCESS_TOKEN]
-        cluster_id 'my-kuby-test'
+        cluster_id app_creds[:KUBY_DIGITALOCEAN_CLUSTER_ID]
       end
     end
   end
