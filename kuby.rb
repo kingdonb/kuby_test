@@ -15,27 +15,25 @@ Kuby.define('KubyTest') do
     )
 
     docker do
-      # Configure your Docker registry credentials here. Add them to your
-      # Rails credentials file by running `bundle exec rake credentials:edit`.
       credentials do
         username app_creds[:KUBY_DOCKER_USERNAME]
         password app_creds[:KUBY_DOCKER_PASSWORD]
         email app_creds[:KUBY_DOCKER_EMAIL]
       end
 
-      # Configure the URL to your Docker image here, eg:
-      # image_url 'foo.bar.com/me/myproject'
-      #
-      # If you're using Gitlab's Docker registry, try something like this:
-      # image_url 'registry.gitlab.com/<username>/<repo>'
-
       image_url 'docker.io/kingdonb/kuby-test'
     end
 
     kubernetes do
+      provider :digitalocean do
+        access_token app_creds[:KUBY_DIGITALOCEAN_ACCESS_TOKEN]
+        cluster_id app_creds[:KUBY_DIGITALOCEAN_CLUSTER_ID]
+      end
+
       # Add a plugin that facilitates deploying a Rails app.
       add_plugin :rails_app do
         hostname 'kuby-test.hephy.pro'
+
         # configure database credentials
         database do
           user app_creds[:KUBY_DB_USER]
@@ -43,10 +41,6 @@ Kuby.define('KubyTest') do
         end
       end
 
-      provider :digitalocean do
-        access_token app_creds[:KUBY_DIGITALOCEAN_ACCESS_TOKEN]
-        cluster_id app_creds[:KUBY_DIGITALOCEAN_CLUSTER_ID]
-      end
     end
   end
 end

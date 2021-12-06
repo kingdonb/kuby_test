@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
+ruby '2.7.5'
 
 gem 'kuby-core', '< 1.0'
 gem 'kuby-digitalocean', '< 1.0'
