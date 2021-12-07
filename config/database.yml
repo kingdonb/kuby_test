@@ -83,4 +83,4 @@ production:
   <<: *default
   database: kuby_test_production
   username: kuby_test
-  password: <%= Rails.application.credentials.dig(:production, :KUBY_DB_PASSWORD) %>
+  password: <%= Rails.application.credentials[:KUBY_DB_PASSWORD] %>
