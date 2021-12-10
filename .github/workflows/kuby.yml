@@ -1,0 +1,16 @@
+name: Kuby build and push
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.5
+        bundler-cache: true
+    - run: bundle exec kuby -e production build
+    - run: bundle exec kuby -e production push
