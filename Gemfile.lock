@@ -1,3 +1,21 @@
+GIT
+  remote: https://github.com/kingdonb/kuby-core.git
+  revision: 886ffe8e7881f1b16122c4804ebcde06be45290d
+  specs:
+    kuby-core (0.14.0)
+      colorize (~> 0.8)
+      docker-remote (~> 0.6)
+      gli (~> 2.0)
+      helm-cli (~> 0.3)
+      krane (>= 1.1.4, < 2.0)
+      kube-dsl (~> 0.4)
+      kubernetes-cli (~> 0.3)
+      kuby-cert-manager (>= 0.3)
+      kuby-kube-db (>= 0.6)
+      railties (>= 5.1)
+      rouge (~> 3.0)
+      sorbet-runtime-stub (~> 0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -185,19 +203,6 @@ GEM
     kuby-cert-manager (0.3.0)
       helm-cli (~> 0.1)
       kube-dsl (~> 0.1)
-    kuby-core (0.14.0)
-      colorize (~> 0.8)
-      docker-remote (~> 0.6)
-      gli (~> 2.0)
-      helm-cli (~> 0.3)
-      krane (>= 1.1.4, < 2.0)
-      kube-dsl (~> 0.4)
-      kubernetes-cli (~> 0.3)
-      kuby-cert-manager (>= 0.3)
-      kuby-kube-db (>= 0.6)
-      railties (>= 5.1)
-      rouge (~> 3.0)
-      sorbet-runtime-stub (~> 0.2)
     kuby-digitalocean (0.4.3)
       droplet_kit (~> 3.5)
       kube-dsl (~> 0.1)
@@ -337,7 +342,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   jbuilder (~> 2.7)
-  kuby-core (< 1.0)
+  kuby-core!
   kuby-digitalocean (< 1.0)
   listen (~> 3.3)
   pg (~> 1.1)
