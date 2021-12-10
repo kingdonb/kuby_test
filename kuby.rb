@@ -34,11 +34,7 @@ Kuby.define('KubyTest') do
       add_plugin :rails_app do
         hostname 'kuby-test.hephy.pro'
 
-        # configure database credentials
-        database do
-          user app_creds[:KUBY_DB_USER]
-          password app_creds[:KUBY_DB_PASSWORD]
-        end
+        manage_database false
       end
 
     end
