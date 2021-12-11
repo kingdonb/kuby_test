@@ -31,10 +31,12 @@ jobs:
     - name: Install dependencies
       run: bundle install
 
-    - run: RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} bundle exec kuby -e production build
+    - run: bundle exec kuby -e production build
       env:
         CR_PAT: ${{ secrets.CR_PAT }}
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
-    - run: RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} bundle exec kuby -e production push
+    - run: bundle exec kuby -e production push
       env:
         CR_PAT: ${{ secrets.CR_PAT }}
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
