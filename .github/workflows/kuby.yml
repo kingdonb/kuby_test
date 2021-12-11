@@ -17,10 +17,12 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
+    - uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
       with:
         ruby-version: 2.7.5
         bundler-cache: true
         cache-version: 1
+    - name: Install dependencies
+        run: bundle install
     - run: RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} bundle exec kuby -e production build
     - run: RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} bundle exec kuby -e production push
