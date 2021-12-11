@@ -17,7 +17,7 @@ Kuby.define('KubyTest') do
     docker do
       credentials do
         username app_creds[:KUBY_DOCKER_USERNAME]
-        password app_creds[:KUBY_DOCKER_PASSWORD]
+        password ENV['GITHUB_TOKEN']
         email app_creds[:KUBY_DOCKER_EMAIL]
       end
 
