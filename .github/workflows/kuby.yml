@@ -5,6 +5,9 @@ on:
       - main
 jobs:
   test:
+    permissions:
+      packages: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - name: Set up Docker Buildx
