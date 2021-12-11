@@ -25,10 +25,7 @@ Kuby.define('KubyTest') do
     end
 
     kubernetes do
-      provider :digitalocean do
-        access_token app_creds[:KUBY_DIGITALOCEAN_ACCESS_TOKEN]
-        cluster_id app_creds[:KUBY_DIGITALOCEAN_CLUSTER_ID]
-      end
+      provider :bare_metal
 
       # Add a plugin that facilitates deploying a Rails app.
       add_plugin :rails_app do
