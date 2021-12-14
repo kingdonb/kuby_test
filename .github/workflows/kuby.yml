@@ -16,6 +16,8 @@ jobs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
+      with:
+        install: true
 
    # - name: Cache Docker layers
    #   uses: actions/cache@v2
@@ -46,8 +48,13 @@ jobs:
       uses: crazy-max/ghaction-github-runtime@v1
 
     - name: Kuby build (and push)
-      #run: bundle exec kuby -e production build -- --cache-from=type=local,src=/tmp/.buildx-cache --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max --push
-      run: bundle exec kuby -e production build -- --push
+      run: |
+        bundle exec kuby -e production build --only app -- \
+        --cache-from=type=gha,scope=app --cache-to=type=gha,scope=app,mode=max \
+        --push
+        bundle exec kuby -e production build --only assets -- \
+        --cache-from=type=gha,scope=assets --cache-to=type=gha,scope=assets,mode=max \
+        --push
       env:
         CR_PAT: ${{ secrets.GITHUB_TOKEN }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}

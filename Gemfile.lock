@@ -1,21 +1,3 @@
-GIT
-  remote: https://github.com/kingdonb/kuby-core.git
-  revision: 8e834a04228a774aeccbe469c07798e12e2ff0b5
-  specs:
-    kuby-core (0.16.0.pre.alpha1)
-      colorize (~> 0.8)
-      docker-remote (~> 0.6)
-      gli (~> 2.0)
-      helm-cli (~> 0.3)
-      krane (>= 1.1.4, < 2.0)
-      kube-dsl (~> 0.4)
-      kubernetes-cli (~> 0.3)
-      kuby-cert-manager (>= 0.3)
-      kuby-kube-db (>= 0.6)
-      railties (>= 5.1)
-      rouge (~> 3.0)
-      sorbet-runtime-stub (~> 0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -143,7 +125,13 @@ GEM
       signet (~> 0.15)
     helm-cli (0.3.0)
       helm-rb (~> 0.1)
+    helm-rb (0.2.0-aarch64-linux)
+    helm-rb (0.2.0-arm-linux)
     helm-rb (0.2.0-arm64-darwin)
+    helm-rb (0.2.0-arm64-linux)
+    helm-rb (0.2.0-ppc64le-linux)
+    helm-rb (0.2.0-s390x-linux)
+    helm-rb (0.2.0-x86_64-darwin)
     helm-rb (0.2.0-x86_64-linux)
     http (4.4.1)
       addressable (~> 2.3)
@@ -197,6 +185,19 @@ GEM
     kuby-cert-manager (0.3.0)
       helm-cli (~> 0.1)
       kube-dsl (~> 0.1)
+    kuby-core (0.15.0)
+      colorize (~> 0.8)
+      docker-remote (~> 0.6)
+      gli (~> 2.0)
+      helm-cli (~> 0.3)
+      krane (>= 1.1.4, < 2.0)
+      kube-dsl (~> 0.4)
+      kubernetes-cli (~> 0.3)
+      kuby-cert-manager (>= 0.3)
+      kuby-kube-db (>= 0.6)
+      railties (>= 5.1)
+      rouge (~> 3.0)
+      sorbet-runtime-stub (~> 0.2)
     kuby-digitalocean (0.4.3)
       droplet_kit (~> 3.5)
       kube-dsl (~> 0.1)
@@ -231,7 +232,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.12.5-arm64-darwin)
       racc (~> 1.4)
-    oj (3.13.9)
+    oj (3.13.10)
     os (1.1.4)
     pg (1.2.3)
     public_suffix (4.0.6)
@@ -336,7 +337,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   jbuilder (~> 2.7)
-  kuby-core (~> 0.16.0.a)!
+  kuby-core (~> 0.15.0)
   kuby-digitalocean (< 1.0)
   listen (~> 3.3)
   pg (~> 1.1)
