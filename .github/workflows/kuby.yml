@@ -47,7 +47,8 @@ jobs:
 
     - name: Kuby build (and push)
       #run: bundle exec kuby -e production build -- --cache-from=type=local,src=/tmp/.buildx-cache --cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max --push
-      run: bundle exec kuby -e production build -- --cache-from ghcr.io/kingdonb/kuby-tester:latest --cache-from=type=gha --cache-to=type=gha,mode=max --push
+      run: bundle exec kuby -e production build -- --cache-from ghcr.io/kingdonb/kuby-tester:latest-assets \
+        --cache-from ghcr.io/kingdonb/kuby-tester:latest --cache-from=type=gha --cache-to=type=gha,mode=max --push
       env:
         CR_PAT: ${{ secrets.GITHUB_TOKEN }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
