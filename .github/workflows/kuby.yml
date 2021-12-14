@@ -47,12 +47,16 @@ jobs:
     - name: Expose GitHub Runtime
       uses: crazy-max/ghaction-github-runtime@v1
 
-    - name: Kuby build (and push)
-      run: |
-        bundle exec kuby -e production build --only app -- \
+    - name: Kuby build and push app image
+      run: bundle exec kuby -e production build --only app -- \
         --cache-from=type=gha,scope=app --cache-to=type=gha,scope=app,mode=max \
         --push
-        bundle exec kuby -e production build --only assets -- \
+      env:
+        CR_PAT: ${{ secrets.GITHUB_TOKEN }}
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    - name: Kuby build and push assets image
+      run: bundle exec kuby -e production build --only assets -- \
         --cache-from=type=gha,scope=assets --cache-to=type=gha,scope=assets,mode=max \
         --push
       env:
