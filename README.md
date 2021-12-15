@@ -145,13 +145,46 @@ Look to [Flux's image reflector controller](https://github.com/fluxcd/image-refl
 
 This option has not been fully explored yet, but any project without permanently hosted resources of their own can follow Flux's example.
 
-Running builds are a job of the project infrastructure, and they can use the local cache when nodes are reused. GitHub will sometimes reuse our nodes, and we can opportunistically take advantage of that event when it does occur.
+One notable difference that users likely will encounter if they are trying to maintain a local cache between builds, is the cache scope must be unique for each image built. I was not able to adapt this strategy before giving up and looking for other options, but I think there isn't any reason it should not work just fine.
+
+Running builds are a job of the project infrastructure, and they can use the local cache when nodes are reused. GitHub will sometimes reuse our nodes, and we can opportunistically take advantage of that event when it does occur. But can we keep an instance of the buildkit builder around for longer than the lifetime of a build job?
 
 Expiring or invalidation of the cache will cause some builds to take longer. This is not a disaster, but should be considered as necessary and expected; builds will always take up some time, and no matter how well our cache strategies work, we will rarely if ever find them running at 100% hit ratios.
 
-However, as the next option will show, depending on language runtimes, rebuilding a new container image from scratch might not always be necessary.
+### Caching Docker with an API: Option 3 - GitHub Actions Cache
 
-### Skipping Docker Build: Option 3 - Okteto CLI
+This seems to be the best option.
+
+```yaml
+    - name: Expose GitHub Runtime
+      uses: crazy-max/ghaction-github-runtime@v1
+
+    - name: Kuby build (and push) app image
+      run: bundle exec kuby -e production build --only app -- \
+        --cache-from=type=gha,scope=app \
+        --cache-to=type=gha,scope=app,mode=max \
+        --push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    - name: Kuby build (and push) assets image
+      run: bundle exec kuby -e production build --only assets -- \
+        --cache-from=type=gha,scope=assets \
+        --cache-to=type=gha,scope=assets,mode=max \
+        --push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+```
+
+This uses the GitHub Actions Caching API directly, which does not assume that builds can carry anything with them into their next life.
+
+Only a hosted runner could be faster, if it kept around a builder which kept local caches and persisted them locally, such that for cache hits accessing the cache service across GitHub's high-speed local network link to download image layers would not even be necessary.
+
+With caching, builds can be made very fast. Hosted runners could be even faster. However, as the next option will show, rebuilding a new container image from scratch might not always be necessary. There are some great options here for Ruby devs.
+
+### Skipping Docker Build: Option 4 - Okteto CLI
 
 If waiting 30 seconds between each push for CI to build and Kubernetes to deploy is still too long for your dev team's expectations or sensibilities, go ahead and build on something like Okteto where your changes [can be synced directly into a running pod](https://okteto.com/docs/samples/ruby/).
 
