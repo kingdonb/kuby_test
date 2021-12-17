@@ -10,6 +10,12 @@ Kuby itself runs Docker and within Docker must install Kuby as well. So there ar
 
 If both cannot be cached effectively, then many minutes will be wasted every build re-installing Ruby gems and re-compiling native extensions every build. Correct configuration of caching avoids this waste that slows our build and does not add value.
 
+### `tl;dr` copy `.github/workflows/kuby.yml`
+
+This repo is a [basic rails app](https://twitter.com/searls/status/1245353222425972736) that should serve as a proving ground for implementing the advice that follows. If you have a `kuby.rb` file already and have installed the `getkuby/kuby` gem in your Rails app, then you can copy this file into the same path in your git repository and adjust the parameters like Ruby version for your own environment.
+
+Unless you have everything configured already, there are some steps to make this work on a new repository.
+
 ### Caching Rubygems Installation
 
 The `ruby/setup-ruby@v1` action installs Ruby and provides caching of the bundle artifacts (outside of the Docker image.)
@@ -48,17 +54,21 @@ Kuby.define 'KubyTest' do
   # ...
 ```
 
+Each commit on the `main` branch results in a build and push. The destination repo is defined in `kuby.rb` in the `docker` block, through the `image_url` method.
+
 In `credentials.yml.enc` we have stored some encrypted values in `app_creds` according to [the Kuby guide](https://getkuby.io/docs/#configuring-docker). We placed a value in `KUBY_DOCKER_USERNAME` that is used as an `imagePullSecret`, and a corresponding token in `KUBY_DOCKER_PASSWORD` which should not be given write access to the package registry. This is for secure image pull access only, (and could be omitted altogether for public images.)
 
-By using an environment variable instead of storing a PAT in the rails encrypted credentials file, we can enable using ambient credentials with Kuby to substitute a token with `write:packages` when needed. If a private repo is used, be aware that a token with `read:packages` will also be needed at build-time, as Kuby assets images include a copy of the assets' prior version, so the builder needs to be able to pull from the registry.
+By using an environment variable instead of storing a PAT in the rails encrypted credentials file, we can enable using ambient credentials with Kuby to substitute a token with `write:packages` only when needed. If a private repo is used, be aware that a token with `read:packages` will also be needed at build-time, as Kuby assets images include a copy of the assets' prior version, so the builder needs to be able to pull from the registry.
 
-We can add a repository secret `CR_PAT` (or anything else other than `GITHUB_TOKEN`) and populate it with a Personal Access Token scoped for `write:packages` as described in [GitHub Docs](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry). This may be helpful for creating a new package, when no existing package repository already falls within the git repository's scope.
+We can add a repository secret `CR_PAT` (or anything else other than `GITHUB_TOKEN`) and populate it with an un-scoped Personal Access Token for `write:packages` as described in [GitHub Docs](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry). This may be helpful and necessary for admin creating a new package at first, when no existing package repository already falls within the git repository's scope.
 
-If you still need to create a package registry on `ghcr.io`, you can start by generating a Personal Access Token now.
+If you still need to create a package registry on `ghcr.io`, you can go ahead and start by generating a Personal Access Token now.
 
-Creation of a new GitHub package happens implicitly when the first image is pushed. If the package registry name doesn't match the source repository, it may also be necessary to [connect the repo to the package](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) since GitHub won't be able to connect them implicitly.
+Creation of a new GitHub package happens implicitly when the first image is pushed. So use your PAT to push any image to the registry you wish to create. If the package registry name doesn't match the source repository (or perhaps even if it does match), it may also be necessary to [connect the repo to the package](https://docs.github.com/en/packages/learn-github-packages/connecting-a-repository-to-a-package) since GitHub won't be able to connect them implicitly.
 
-Configure the package settings now, in case you would like to [make this registry public](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility)!
+Configure the package settings now, in case you would like to [make this registry public](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility) and add write access for the Actions runner at the registry configuration page.
+
+Then the permissions that follow as we will configure can push images through ambient credentials without storing any PAT!
 
 #### Using Ambient Credentials on GitHub Actions
 
@@ -195,3 +205,9 @@ When implemented well, this approach can even help some members of your team par
 We can spend some time to ensure we don't commit waste in our CI builds. But before spending too much time optimizing caches for every niche, we can look for solutions that help us to build less often.
 
 If we can spend two minutes on a waste but "only this once," so that running a full build is not always a requirement of testing a change, then we will be able to run our sometimes-wasteful builds even less often! Now, let's try it out.
+
+## tl;dr How do I run this workflow on a fresh repo?
+
+What steps are necessary if we are `tl;dr` and YOLO through the instructions without reading any of the previous paragraphs?
+
+TODO
