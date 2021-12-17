@@ -26,9 +26,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Expose GitHub Runtime
-      uses: crazy-max/ghaction-github-runtime@v1
-
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.5
@@ -37,6 +34,9 @@ jobs:
 
     - name: Verify dependencies
       run: bundle check
+
+    - name: Expose GitHub Runtime
+      uses: crazy-max/ghaction-github-runtime@v1
 
     - name: Kuby build (and push) app image
       run: bundle exec kuby -e production build --only app -- \
