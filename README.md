@@ -14,7 +14,7 @@ If both cannot be cached effectively, then many minutes will be wasted every bui
 
 This repo is a [basic rails app](https://twitter.com/searls/status/1245353222425972736) that should serve as a proving ground for implementing the advice that follows. If you have a `kuby.rb` file already and have installed the `getkuby/kuby` gem in your Rails app, then you can copy this file into the same path in your git repository and adjust the parameters like Ruby version for your own environment.
 
-Unless you have everything configured already, there are some steps to make this work on a new repository.
+Unless you have everything configured already, there are some steps to make this work on a new repository. [How do I run this workflow on a fresh repo?](#tldr-how-do-i-run-this-workflow-on-a-fresh-repo).
 
 ### Caching Rubygems Installation
 
