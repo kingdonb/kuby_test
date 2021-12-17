@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.5'
 
+gem 'pry-rails'
+
 gem 'kuby-core', '~> 0.16.0.a', github: 'kingdonb/kuby-core'
 gem 'kuby-digitalocean', '< 1.0'
 
