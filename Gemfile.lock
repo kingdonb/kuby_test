@@ -1,14 +1,21 @@
 GIT
-  remote: https://github.com/kingdonb/kuby-core.git
-  revision: 875eeca781a07743cc48a3bda1c4c4bb057776d2
+  remote: https://github.com/kingdonb/kube-dsl.git
+  revision: af0858b41e6ec553f61cbe46f1023d5d978f747f
   specs:
-    kuby-core (0.16.0.pre.alpha1)
+    kube-dsl (0.7.0)
+      dry-inflector (~> 0.2)
+
+GIT
+  remote: https://github.com/kingdonb/kuby-core.git
+  revision: 0747fe6f26a1997f74ca4aa3a57c62b3d5700aed
+  specs:
+    kuby-core (0.16.0.pre.alpha2)
       colorize (~> 0.8)
       docker-remote (~> 0.6)
       gli (~> 2.0)
       helm-cli (~> 0.3)
       krane (>= 1.1.4, < 2.0)
-      kube-dsl (~> 0.4)
+      kube-dsl (~> 0.7)
       kubernetes-cli (~> 0.3)
       kuby-cert-manager (>= 0.3)
       kuby-kube-db (>= 0.6)
@@ -183,8 +190,6 @@ GEM
       oj (~> 3.0)
       statsd-instrument (>= 2.8, < 3.1)
       thor (>= 1.0, < 2.0)
-    kube-dsl (0.6.1)
-      dry-inflector (~> 0.2)
     kubeclient (4.7.0)
       http (>= 3.0, < 5.0)
       recursive-open-struct (~> 1.1, >= 1.1.1)
@@ -342,6 +347,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   jbuilder (~> 2.7)
+  kube-dsl (~> 0.7.0)!
   kuby-core (~> 0.16.0.a)!
   kuby-digitalocean (< 1.0)
   listen (~> 3.3)
