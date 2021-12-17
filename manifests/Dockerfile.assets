@@ -1,10 +1,10 @@
-FROM ghcr.io/kingdonb/kuby-tester:20211217162433 AS kubytest-20211217162433
+FROM ghcr.io/kingdonb/kuby-tester:20211217210004 AS kubytest-20211217210004
 ARG RAILS_MASTER_KEY
 RUN mkdir -p /usr/share/assets
 RUN env RAILS_MASTER_KEY=$RAILS_MASTER_KEY bundle exec rake kuby:rails_app:assets:copy
-FROM ghcr.io/kingdonb/kuby-tester:20211217164810 AS kubytest-20211217164810
+FROM ghcr.io/kingdonb/kuby-tester:20211218160220 AS kubytest-20211218160220
 ARG RAILS_MASTER_KEY
-COPY --from=kubytest-20211217162433 /usr/share/assets /usr/share/assets
+COPY --from=kubytest-20211217210004 /usr/share/assets /usr/share/assets
 RUN env RAILS_MASTER_KEY=$RAILS_MASTER_KEY bundle exec rake kuby:rails_app:assets:copy
 FROM nginx:1.9-alpine
-COPY --from=kubytest-20211217164810 /usr/share/assets /usr/share/nginx/assets
+COPY --from=kubytest-20211218160220 /usr/share/assets /usr/share/nginx/assets

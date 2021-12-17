@@ -3,9 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.5'
 
-gem 'kuby-core', '~> 0.16.0.a', github: 'kingdonb/kuby-core'
-gem 'kube-dsl', '~> 0.7.0', github: 'kingdonb/kube-dsl'
-gem 'kuby-digitalocean', '< 1.0'
+gem 'kuby-core',          '~> 0.16.0.a',  github: 'kingdonb/kuby-core'
+gem 'kube-dsl',           '~> 0.7.0',     github: 'kingdonb/kube-dsl'
+gem 'kuby-cert-manager',  '~> 0.4.0',     github: 'kingdonb/kuby-cert-manager'
+
+# gem 'kuby-digitalocean', '< 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
