@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/kingdonb/kuby-core.git
-  revision: 0747fe6f26a1997f74ca4aa3a57c62b3d5700aed
+  revision: e63c8e975ce19feaa4146ff9fc584db05726c4ca
   specs:
     kuby-core (0.16.0.pre.alpha2)
       colorize (~> 0.8)

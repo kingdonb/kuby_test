@@ -71,7 +71,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211217192700
+        image: ghcr.io/kingdonb/kuby-tester:20211217195225
         imagePullPolicy: IfNotPresent
         name: kubytest-web
         ports:
@@ -101,7 +101,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211217192700
+        image: ghcr.io/kingdonb/kuby-tester:20211217195225
         name: kubytest-create-db
       - command:
         - bundle
@@ -113,12 +113,12 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211217192700
+        image: ghcr.io/kingdonb/kuby-tester:20211217195225
         name: kubytest-migrate-db
       restartPolicy: Always
       serviceAccountName: kubytest-sa
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -132,20 +132,29 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: kubytest-svc
-          servicePort: 8080
+          service:
+            name: kubytest-svc
+            port:
+              number: 8080
         path: "/"
+        pathType: Prefix
   - host: kuby-test.hephy.pro
     http:
       paths:
       - backend:
-          serviceName: kubytest-assets-svc
-          servicePort: 8082
+          service:
+            name: kubytest-assets-svc
+            port:
+              number: 8082
         path: "/assets"
+        pathType: Prefix
       - backend:
-          serviceName: kubytest-assets-svc
-          servicePort: 8082
+          service:
+            name: kubytest-assets-svc
+            port:
+              number: 8082
         path: "/packs"
+        pathType: Prefix
   tls:
   - hosts:
     - kuby-test.hephy.pro
@@ -248,7 +257,7 @@ spec:
         role: assets
     spec:
       containers:
-      - image: ghcr.io/kingdonb/kuby-tester:20211217192700-assets
+      - image: ghcr.io/kingdonb/kuby-tester:20211217195225-assets
         imagePullPolicy: IfNotPresent
         name: kubytest-assets
         ports:
