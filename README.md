@@ -10,7 +10,7 @@ Kuby itself runs Docker and within Docker must install Kuby as well. So there ar
 
 If both cannot be cached effectively, then many minutes will be wasted every build re-installing Ruby gems and re-compiling native extensions every build. Correct configuration of caching avoids this waste that slows our build and does not add value.
 
-### `tl;dr` copy `.github/workflows/kuby.yml`
+### `tl;dr` copy [`.github/workflows/kuby.yml`](https://github.com/kingdonb/kuby_test/tree/main/.github/workflows/kuby.yml)
 
 This repo is a [basic rails app](https://twitter.com/searls/status/1245353222425972736) that should serve as a proving ground for implementing the advice that follows. If you have a `kuby.rb` file already and have installed the `getkuby/kuby` gem in your Rails app, then you can copy this file into the same path in your git repository and adjust the parameters like Ruby version for your own environment.
 
