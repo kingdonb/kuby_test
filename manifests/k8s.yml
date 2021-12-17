@@ -113,11 +113,10 @@ spec:
       restartPolicy: Always
       serviceAccountName: kubytest-sa
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-production
   name: kubytest-ingress
   namespace: kubytest-kingdonb
@@ -127,19 +126,26 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: kubytest-svc
-          servicePort: 8080
+          service:
+            name: kubytest-svc
+            port:
+              number: 8080
         path: "/"
+        pathType: Prefix
   - host: kuby-test.hephy.pro
     http:
       paths:
       - backend:
-          serviceName: kubytest-assets-svc
-          servicePort: 8082
+          service:
+            name: kubytest-assets-svc
+            port:
+              number: 8082
         path: "/assets"
       - backend:
-          serviceName: kubytest-assets-svc
-          servicePort: 8082
+          service:
+            name: kubytest-assets-svc
+            port:
+              number: 8082
         path: "/packs"
   tls:
   - hosts:
