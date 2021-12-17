@@ -14,7 +14,9 @@ If both cannot be cached effectively, then many minutes will be wasted every bui
 
 This repo is a [basic rails app](https://twitter.com/searls/status/1245353222425972736) that should serve as a proving ground for implementing the advice that follows. If you have a `kuby.rb` file already and have installed the `getkuby/kuby` gem in your Rails app, then you can copy this file into the same path in your git repository and adjust the parameters like Ruby version for your own environment.
 
-Unless you have everything configured already, there are some steps to make this work on a new repository. [How do I run this workflow on a fresh repo?](#tldr-how-do-i-run-this-workflow-on-a-fresh-repo).
+Unless you have everything configured already, there are some steps to make this work on a new repository.
+
+[How do I run this workflow on a fresh repo?](#tldr-how-do-i-run-this-workflow-on-a-fresh-repo)
 
 ### Caching Rubygems Installation
 
@@ -208,6 +210,6 @@ If we can spend two minutes on a waste but "only this once," so that running a f
 
 ## tl;dr How do I run this workflow on a fresh repo?
 
-What steps are necessary if we are `tl;dr` and YOLO through the instructions without reading any of the previous paragraphs?
+What steps are necessary if we are `tl;dr` and want to YOLO through the instructions without reading any of the backstory or character development in previous paragraphs?
 
 TODO
