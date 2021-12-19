@@ -23,7 +23,10 @@ RUN gem install bundler -v 2.2.33
 COPY Gemfile .
 COPY Gemfile.lock .
 ENV BUNDLE_WITHOUT='development test deploy'
-RUN bundle install --jobs $(nproc) --retry 3 --gemfile Gemfile
+RUN gem install specific_install
+RUN gem specific_install https://github.com/kingdonb/prebundler
+COPY .prebundle_config .
+RUN prebundle install
 RUN bundle binstubs --all
 ENV PATH=./bin:$PATH
 COPY package.json yarn.loc[k] .npmr[c] .yarnr[c] ./
