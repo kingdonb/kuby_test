@@ -42,7 +42,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    getkuby.io/dockerfile-checksum: 49602c374399cc5d74f824386d8e9984840f4ebae97ad78ff3ff46eb2854fe83
+    getkuby.io/dockerfile-checksum: '00926758b519159161a2df3c5809d18be528210784bae477b2aac673aa122f77'
   labels:
     app: kubytest
     role: web
@@ -71,7 +71,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211218230331
+        image: ghcr.io/kingdonb/kuby-tester:20211219224852
         imagePullPolicy: IfNotPresent
         name: kubytest-web
         ports:
@@ -101,7 +101,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211218230331
+        image: ghcr.io/kingdonb/kuby-tester:20211219224852
         name: kubytest-create-db
       - command:
         - bundle
@@ -113,7 +113,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211218230331
+        image: ghcr.io/kingdonb/kuby-tester:20211219224852
         name: kubytest-migrate-db
       restartPolicy: Always
       serviceAccountName: kubytest-sa
@@ -257,7 +257,7 @@ spec:
         role: assets
     spec:
       containers:
-      - image: ghcr.io/kingdonb/kuby-tester:20211218230331-assets
+      - image: ghcr.io/kingdonb/kuby-tester:20211219224852-assets
         imagePullPolicy: IfNotPresent
         name: kubytest-assets
         ports:
