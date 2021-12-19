@@ -31,6 +31,17 @@ GIT
       rouge (~> 3.0)
       sorbet-runtime-stub (~> 0.2)
 
+GIT
+  remote: https://github.com/kingdonb/prebundler.git
+  revision: f21ae395818cb4b155333d58d10536687a4c5fd6
+  specs:
+    prebundler (0.13.0.pre.alpha1)
+      aws-sdk (~> 2.0)
+      bundler
+      gli (~> 2.0)
+      ohey (~> 1.0)
+      parallel (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -95,6 +106,16 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    aws-eventstream (1.2.0)
+    aws-sdk (2.11.632)
+      aws-sdk-resources (= 2.11.632)
+    aws-sdk-core (2.11.632)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.11.632)
+      aws-sdk-core (= 2.11.632)
+    aws-sigv4 (1.4.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     bindex (0.8.1)
     bootsnap (1.9.3)
       msgpack (~> 1.0)
@@ -167,6 +188,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.4)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
     jsonpath (0.9.9)
       multi_json
       to_regexp (~> 0.2.1)
@@ -228,8 +250,11 @@ GEM
       racc (~> 1.4)
     nokogiri (1.12.5-arm64-darwin)
       racc (~> 1.4)
+    ohey (1.0.0)
+      wmi-lite (~> 1.0)
     oj (3.13.10)
     os (1.1.4)
+    parallel (1.21.0)
     pg (1.2.3)
     public_suffix (4.0.6)
     puma (5.5.2)
@@ -315,6 +340,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wmi-lite (1.0.5)
     zeitwerk (2.5.1)
 
 PLATFORMS
@@ -330,6 +356,7 @@ DEPENDENCIES
   kuby-core (~> 0.16.0.a)!
   listen (~> 3.3)
   pg (~> 1.1)
+  prebundler (~> 0.13.0.a)!
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)

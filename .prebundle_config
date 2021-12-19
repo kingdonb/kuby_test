@@ -1,3 +1,4 @@
+require 'active_support'
 require 'active_support/core_ext'
 require 'active_support/encrypted_configuration'
 
@@ -8,9 +9,10 @@ Prebundler.configure do |config|
     env_key: 'RAILS_MASTER_KEY',
     raise_if_missing_key: true
   )
+
   config.storage_backend = Prebundler::MinioBackend.new(
-    access_key_id: app_creds['MINIO_ACCESS_KEY'],
-    secret_access_key: app_creds['MINIO_SECRET_KEY'],
+    access_key_id: app_creds[:MINIO_ACCESS_KEY],
+    secret_access_key: app_creds[:MINIO_SECRET_KEY],
     bucket: 'kuby-tester',
     region: 'minio-stage'  # or whatever
   )
