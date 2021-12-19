@@ -32,7 +32,7 @@ Kuby.define('KubyTest') do
         hostname 'kuby-test.hephy.pro'
 
         manage_database false
-        ingress_class ''
+        ingress_class 'traefik'
       end
     end
   end
