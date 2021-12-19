@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: https://github.com/kingdonb/kuby-core.git
-  revision: 7029b62dce868ce44d69ac836e0aeb8d41eb1234
+  revision: 9c945ed283cd48a1e9d4ae5df722fb2fa2a26ef3
   specs:
-    kuby-core (0.16.0.pre.alpha5)
+    kuby-core (0.16.0.pre.alpha6)
       colorize (~> 0.8)
       docker-remote (~> 0.6)
       gli (~> 2.0)
