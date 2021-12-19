@@ -1,3 +1,6 @@
+require 'active_support/core_ext'
+require 'active_support/encrypted_configuration'
+
 Prebundler.configure do |config|
   app_creds = ActiveSupport::EncryptedConfiguration.new(
     config_path: File.join('config', 'credentials.yml.enc'),
