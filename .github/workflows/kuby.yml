@@ -42,6 +42,8 @@ jobs:
       run: bundle exec kuby -e production build --only app -- \
         --cache-from=type=gha,scope=app \
         --cache-to=type=gha,scope=app,mode=max \
+        --build-arg=MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}
+        --build-arg=MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}
         --push
       env:
         CR_PAT: ${{ secrets.GITHUB_TOKEN }}

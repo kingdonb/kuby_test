@@ -1,18 +1,18 @@
-require 'active_support'
-require 'active_support/core_ext'
-require 'active_support/encrypted_configuration'
+# require 'active_support'
+# require 'active_support/core_ext'
+# require 'active_support/encrypted_configuration'
 
 Prebundler.configure do |config|
-  app_creds = ActiveSupport::EncryptedConfiguration.new(
-    config_path: File.join('config', 'credentials.yml.enc'),
-    key_path: File.join('config', 'master.key'),
-    env_key: 'RAILS_MASTER_KEY',
-    raise_if_missing_key: true
-  )
+  # app_creds = ActiveSupport::EncryptedConfiguration.new(
+  #   config_path: File.join('config', 'credentials.yml.enc'),
+  #   key_path: File.join('config', 'master.key'),
+  #   env_key: 'RAILS_MASTER_KEY',
+  #   raise_if_missing_key: true
+  # )
 
   config.storage_backend = Prebundler::MinioBackend.new(
-    access_key_id: app_creds[:MINIO_ACCESS_KEY],
-    secret_access_key: app_creds[:MINIO_SECRET_KEY],
+    access_key_id: ENV['MINIO_ACCESS_KEY'],
+    secret_access_key: ENV['MINIO_SECRET_KEY'],
     bucket: 'kuby-tester',
     endpoint: 'https://minio.hephy.pro'  # or whatever
   )

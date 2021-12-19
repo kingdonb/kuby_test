@@ -23,6 +23,10 @@ RUN gem install bundler -v 2.2.33
 COPY Gemfile .
 COPY Gemfile.lock .
 ENV BUNDLE_WITHOUT='development test deploy'
+ARG MINIO_ACCESS_KEY=required
+ARG MINIO_SECRET_KEY=required
+ENV MINIO_ACCESS_KEY ${MINIO_ACCESS_KEY}
+ENV MINIO_SECRET_KEY ${MINIO_SECRET_KEY}
 RUN gem install specific_install
 RUN gem specific_install https://github.com/kingdonb/prebundler
 COPY .prebundle_config .
