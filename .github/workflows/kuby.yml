@@ -38,6 +38,11 @@ jobs:
    # - name: Expose GitHub Runtime
    #   uses: crazy-max/ghaction-github-runtime@v1
 
+    - name: Set time zone to UTC properly
+      uses: szenius/set-timezone@v1.0
+      with:
+        timezoneLinux: UTC
+
     - name: Kuby build (and push) app image
       run: bundle exec kuby -e production build --only app --
         --build-arg=MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}
