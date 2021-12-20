@@ -6,7 +6,7 @@ on:
 
 jobs:
   release-staging:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       packages: write
       contents: read
@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-      with:
-        install: true
+   # - name: Set up Docker Buildx
+   #   uses: docker/setup-buildx-action@v1
+   #   with:
+   #     install: true
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
@@ -26,34 +26,35 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7.5
-        bundler-cache: true
-        cache-version: 1
+   # - uses: ruby/setup-ruby@v1
+   #   with:
+   #     ruby-version: 2.7.5
+   #     bundler-cache: true
+   #     cache-version: 1
 
     - name: Verify dependencies
       run: bundle check
 
-    - name: Expose GitHub Runtime
-      uses: crazy-max/ghaction-github-runtime@v1
+   # - name: Expose GitHub Runtime
+   #   uses: crazy-max/ghaction-github-runtime@v1
 
     - name: Kuby build (and push) app image
-      run: bundle exec kuby -e production build --only app -- \
-        --cache-from=type=gha,scope=app \
-        --cache-to=type=gha,scope=app,mode=max \
+      run: bundle exec kuby -e production build --only app --
         --build-arg=MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}
         --build-arg=MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}
         --push
+        #--cache-from=type=gha,scope=app \
+        #--cache-to=type=gha,scope=app,mode=max \
       env:
         CR_PAT: ${{ secrets.GITHUB_TOKEN }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     - name: Kuby build (and push) assets image
-      run: bundle exec kuby -e production build --only assets -- \
-        --cache-from=type=gha,scope=assets \
-        --cache-to=type=gha,scope=assets,mode=max \
+      run: bundle exec kuby -e production build --only assets --
         --push
+        #--cache-from=type=gha,scope=assets \
+        #--cache-to=type=gha,scope=assets,mode=max \
+
       env:
         CR_PAT: ${{ secrets.GITHUB_TOKEN }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
