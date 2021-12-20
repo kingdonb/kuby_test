@@ -26,11 +26,11 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7.5
-        bundler-cache: true
-        cache-version: 1
+   # - uses: ruby/setup-ruby@v1
+   #   with:
+   #     ruby-version: 2.7.5
+   #     bundler-cache: true
+   #     cache-version: 1
 
     - name: Verify dependencies
       run: bundle check
