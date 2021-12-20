@@ -8,3 +8,6 @@ log/
 engines/**/log/
 engines/**/tmp/
 public/assets
+config/master.key
+manifests/Dockerfile*
+manifests/k8s.yml
