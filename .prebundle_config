@@ -15,7 +15,7 @@ Prebundler.configure do |config|
     secret_access_key: app_creds[:MINIO_SECRET_KEY],
     #access_key_id: ENV['MINIO_ACCESS_KEY'],
     #secret_access_key: ENV['MINIO_SECRET_KEY'],
-    bucket: 'kingdon-kuby-tester-cache',
-    endpoint: 'https://nyc3.digitaloceanspaces.com'  # or whatever
+    bucket: 'kuby-tester',
+    endpoint: 'https://minio.hephy.pro'  # or whatever
   )
 end
