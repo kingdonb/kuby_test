@@ -32,7 +32,7 @@ jobs:
    #     bundler-cache: true
    #     cache-version: 1
 
-    - name: Verify dependencies
+    - name: Pre-cache dependencies
       run: prebundle install
       env:
         MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
