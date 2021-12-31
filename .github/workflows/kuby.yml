@@ -5,11 +5,11 @@ on:
       - main
 
 jobs:
-  release-staging:
+  prepare-builder:
     runs-on: self-hosted
-    permissions:
-      packages: write
-      contents: read
+   # permissions:
+   #   packages: write
+   #   contents: read
 
     steps:
     - uses: actions/checkout@v2
@@ -51,24 +51,20 @@ jobs:
       with:
         timezoneLinux: UTC
 
-    - name: Kuby build (and push) app image
-      run: bundle exec kuby -e production build --only app --
+jobs:
+  strategy:
+    matrix:
+      image: [app, assets]
+  release-staging:
+    steps:
+
+    - name: Kuby build/push ${{ matrix.image }} image
+      run: bundle exec kuby -e production build --only ${{ matrix.image }} --
         --build-arg=MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}
         --build-arg=MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}
         --push
         #--cache-from=type=gha,scope=app \
         #--cache-to=type=gha,scope=app,mode=max \
-      env:
-        HARBOR_BOT_USER: ${{ secrets.HARBOR_BOT_USER }}
-        HARBOR_BOT_PASSWORD: ${{ secrets.HARBOR_BOT_PASSWORD }}
-        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-
-    - name: Kuby build (and push) assets image
-      run: bundle exec kuby -e production build --only assets --
-        --push
-        #--cache-from=type=gha,scope=assets \
-        #--cache-to=type=gha,scope=assets,mode=max \
-
       env:
         HARBOR_BOT_USER: ${{ secrets.HARBOR_BOT_USER }}
         HARBOR_BOT_PASSWORD: ${{ secrets.HARBOR_BOT_PASSWORD }}
