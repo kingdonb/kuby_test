@@ -51,11 +51,10 @@ jobs:
       with:
         timezoneLinux: UTC
 
-jobs:
-  strategy:
-    matrix:
-      image: [app, assets]
   release-staging:
+    strategy:
+      matrix:
+        image: [app, assets]
     steps:
 
     - name: Kuby build/push ${{ matrix.image }} image
