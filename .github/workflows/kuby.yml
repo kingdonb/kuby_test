@@ -53,6 +53,7 @@ jobs:
 
   release-staging:
     runs-on: self-hosted
+    needs: prepare-builder
     strategy:
       matrix:
         image: [app, assets]
