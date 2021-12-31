@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  build-app:
+  app:
     runs-on: self-hosted
 
     steps:
@@ -60,12 +60,9 @@ jobs:
         HARBOR_BOT_PASSWORD: ${{ secrets.HARBOR_BOT_PASSWORD }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
-  build-assets:
+  assets:
     runs-on: self-hosted
-   needs: build-app
-   #strategy:
-   #  matrix:
-   #    image: [app, assets]
+    needs: app
     steps:
     - uses: actions/checkout@v2
 
