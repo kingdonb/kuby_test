@@ -5,21 +5,11 @@ on:
       - main
 
 jobs:
-  # unused
-#  prepare-builder:
-#    runs-on: self-hosted
-#   # permissions:
-#   #   packages: write
-#   #   contents: read
-#
-
-  release-staging:
+  build-app:
     runs-on: self-hosted
-   #needs: prepare-builder
-    strategy:
-      matrix:
-        image: [app, assets]
-    steps:
+   # permissions:
+   #   packages: write
+   #   contents: read
 
     - uses: actions/checkout@v2
 
@@ -59,8 +49,67 @@ jobs:
       uses: szenius/set-timezone@v1.0
       with:
         timezoneLinux: UTC
-    - name: Kuby build/push ${{ matrix.image }} image
-      run: bundle exec kuby -e production build --only ${{ matrix.image }} --
+
+    - name: Kuby build/push app image
+      run: bundle exec kuby -e production build --only app --
+        --build-arg=MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}
+        --build-arg=MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}
+        --push
+        #--cache-from=type=gha,scope=app \
+        #--cache-to=type=gha,scope=app,mode=max \
+      env:
+        HARBOR_BOT_USER: ${{ secrets.HARBOR_BOT_USER }}
+        HARBOR_BOT_PASSWORD: ${{ secrets.HARBOR_BOT_PASSWORD }}
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+  build-assets:
+    runs-on: self-hosted
+   needs: build-app
+   #strategy:
+   #  matrix:
+   #    image: [app, assets]
+    steps:
+    - uses: actions/checkout@v2
+
+   # - name: Set up Docker Buildx
+   #   uses: docker/setup-buildx-action@v1
+   #   with:
+   #     install: true
+
+    - name: Login to Harbor (img.hephy.pro)
+      uses: docker/login-action@v1
+      with:
+        registry: img.hephy.pro
+        username: ${{ secrets.HARBOR_BOT_USER }}
+        password: ${{ secrets.HARBOR_BOT_PASSWORD }}
+
+
+   # - uses: ruby/setup-ruby@v1
+   #   with:
+   #     ruby-version: 2.7.5
+   #     bundler-cache: true
+   #     cache-version: 1
+
+    - name: Pre-cache dependencies
+      run: prebundle install
+      env:
+        MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
+        MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    - name: Verify dependencies
+      run: bundle check
+
+   # - name: Expose GitHub Runtime
+   #   uses: crazy-max/ghaction-github-runtime@v1
+
+    - name: Set time zone to UTC properly
+      uses: szenius/set-timezone@v1.0
+      with:
+        timezoneLinux: UTC
+
+    - name: Kuby build/push assets image
+      run: bundle exec kuby -e production build --only assets --
         --build-arg=MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}
         --build-arg=MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}
         --push
