@@ -52,6 +52,7 @@ jobs:
         timezoneLinux: UTC
 
   release-staging:
+    runs-on: self-hosted
     strategy:
       matrix:
         image: [app, assets]
