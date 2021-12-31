@@ -71,7 +71,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211220011541
+        image: img.hephy.pro/kuby-tester/kuby_test:20211231035834
         imagePullPolicy: IfNotPresent
         name: kubytest-web
         ports:
@@ -101,7 +101,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211220011541
+        image: img.hephy.pro/kuby-tester/kuby_test:20211231035834
         name: kubytest-create-db
       - command:
         - bundle
@@ -113,7 +113,7 @@ spec:
             name: kubytest-config
         - secretRef:
             name: kubytest-secrets
-        image: ghcr.io/kingdonb/kuby-tester:20211220011541
+        image: img.hephy.pro/kuby-tester/kuby_test:20211231035834
         name: kubytest-migrate-db
       restartPolicy: Always
       serviceAccountName: kubytest-sa
@@ -257,7 +257,7 @@ spec:
         role: assets
     spec:
       containers:
-      - image: ghcr.io/kingdonb/kuby-tester:20211220011541-assets
+      - image: img.hephy.pro/kuby-tester/kuby_test:20211231035834-assets
         imagePullPolicy: IfNotPresent
         name: kubytest-assets
         ports:
