@@ -58,7 +58,8 @@ jobs:
         #--cache-from=type=gha,scope=app \
         #--cache-to=type=gha,scope=app,mode=max \
       env:
-        CR_PAT: ${{ secrets.GITHUB_TOKEN }}
+        HARBOR_BOT_USER: ${{ secrets.HARBOR_BOT_USER }}
+        HARBOR_BOT_PASSWORD: ${{ secrets.HARBOR_BOT_PASSWORD }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     - name: Kuby build (and push) assets image
@@ -68,5 +69,6 @@ jobs:
         #--cache-to=type=gha,scope=assets,mode=max \
 
       env:
-        CR_PAT: ${{ secrets.GITHUB_TOKEN }}
+        HARBOR_BOT_USER: ${{ secrets.HARBOR_BOT_USER }}
+        HARBOR_BOT_PASSWORD: ${{ secrets.HARBOR_BOT_PASSWORD }}
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}

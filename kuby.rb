@@ -16,12 +16,13 @@ Kuby.define('KubyTest') do
 
     docker do
       credentials do
-        username app_creds[:KUBY_DOCKER_USERNAME]
-        password ENV['CR_PAT']
+        # username app_creds[:KUBY_DOCKER_USERNAME]
+        username ENV['HARBOR_BOT_USER']
+        password ENV['HARBOR_BOT_PASSWORD']
         email app_creds[:KUBY_DOCKER_EMAIL]
       end
 
-      image_url 'ghcr.io/kingdonb/kuby-tester'
+      image_url 'img.hephy.pro/kuby-tester/kuby_test'
     end
 
     kubernetes do
