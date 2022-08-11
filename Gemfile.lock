@@ -171,7 +171,15 @@ GEM
       signet (~> 0.15)
     helm-cli (0.3.0)
       helm-rb (~> 0.1)
+    helm-rb (0.2.1-aarch64-linux)
+    helm-rb (0.2.1-arm-linux)
     helm-rb (0.2.1-arm64-darwin)
+    helm-rb (0.2.1-arm64-linux)
+    helm-rb (0.2.1-ppc64le-linux)
+    helm-rb (0.2.1-s390x-linux)
+    helm-rb (0.2.1-x86-linux)
+    helm-rb (0.2.1-x86_64-darwin)
+    helm-rb (0.2.1-x86_64-linux)
     http (4.4.1)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -208,7 +216,15 @@ GEM
       http (>= 3.0, < 5.0)
       recursive-open-struct (~> 1.1, >= 1.1.1)
       rest-client (~> 2.0)
+    kubectl-rb (0.2.1-aarch64-linux)
+    kubectl-rb (0.2.1-arm-linux)
     kubectl-rb (0.2.1-arm64-darwin)
+    kubectl-rb (0.2.1-arm64-linux)
+    kubectl-rb (0.2.1-ppc64le-linux)
+    kubectl-rb (0.2.1-s390x-linux)
+    kubectl-rb (0.2.1-x86-linux)
+    kubectl-rb (0.2.1-x86_64-darwin)
+    kubectl-rb (0.2.1-x86_64-linux)
     kubernetes-cli (0.4.0)
       kubectl-rb (~> 0.2)
     kuby-kube-db (0.7.1)
@@ -359,7 +375,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 2.7.6p219
+   ruby 3.1.2p20
 
 BUNDLED WITH
    2.2.33

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
+ruby '3.1.2'
 
 gem 'kuby-core',          '~> 0.16.0.a',  github: 'kingdonb/kuby-core'
 gem 'kube-dsl',           '~> 0.7.0',     github: 'kingdonb/kube-dsl'
